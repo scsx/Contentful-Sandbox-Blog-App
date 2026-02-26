@@ -1,3 +1,51 @@
+export const BOAT_BASICS = {
+  deposit: {
+    name: 'Security Deposit',
+    price: 1500,
+    description: 'Refundable deposit for potential damages'
+  },
+  marinaFee: {
+    name: 'Marina Mooring Fee',
+    price: 300,
+    description: 'One-time fee for marina berth and facilities',
+    isFixedFee: true
+  }
+}
+
+export const CAR_BASICS = {
+  deposit: {
+    name: 'Security Deposit',
+    price: 500,
+    description: 'Refundable deposit for potential damages'
+  },
+  tolls: {
+    name: 'Toll processing fee',
+    price: 80,
+    description: 'One-time toll charges for highways and bridges',
+    isFixedFee: true
+  }
+}
+
+export const BUS_BASICS = {
+  deposit: {
+    name: 'Security Deposit',
+    price: 3000,
+    description: 'Refundable deposit for potential damages'
+  },
+  driverClearance: {
+    name: 'Driver Background Clearance',
+    price: 150,
+    description: 'One-time verification and admin fee',
+    isFixedFee: true
+  },
+  tolls: {
+    name: 'Toll processing fee',
+    price: 160,
+    description: 'One-time toll charges for highways and bridges',
+    isFixedFee: true
+  }
+}
+
 export const BOAT_EXTRAS = {
   skipper: {
     name: 'Professional Skipper',
