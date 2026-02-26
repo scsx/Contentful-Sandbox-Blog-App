@@ -160,3 +160,42 @@ export const BUS_EXTRAS = {
     description: 'PA system for announcements and presentations'
   }
 }
+
+export const BOAT_LEGAL = [
+  'Comprehensive Insurance Certificate',
+  'Navigation License (Captain)',
+  'Safety Equipment Inspection',
+  'Vessel Registration & Flag',
+  'Pollution Liability Coverage',
+  'Crew Member Certifications'
+]
+
+export const BOAT_COUNTRIES = [
+  'Spain',
+  'France',
+  'Italy',
+  'Croatia',
+  'Greece',
+  'Portugal',
+  'Cyprus',
+  'Malta',
+  'Turkey'
+]
+
+export const CAR_LEGAL = [
+  'Valid Driver License',
+  'Vehicle Insurance Certificate',
+  'Vehicle Registration/Log Book',
+  'MOT Certificate (if required)',
+  'Driving License Check',
+  'Credit Card for damage deposit'
+]
+
+export const BUS_LEGAL = [
+  'Professional Bus Driver License',
+  'Public Transport Insurance',
+  'Vehicle Safety Certificate',
+  'Passenger Liability Insurance',
+  'Driver Background Check',
+  'Route Authorization (if required)'
+]
