@@ -1,14 +1,27 @@
 import { Tabs, Box, Heading } from '@contentful/f36-components'
 import CarTabBasics from './car/CarTabBasics'
 import { BOAT_COUNTRIES } from '../../utils/constants'
+import { ReactNode } from 'react'
 
 type VehicleTabsProps = {
   vehicleType: 'car' | 'boat' | 'bus'
-  selectedBasics?: any
-  onBasicsChange?: (basics: any) => void
 }
 
-const VehicleTabs = ({ vehicleType, selectedBasics, onBasicsChange }: VehicleTabsProps) => {
+type StyledPanelProps = {
+  children: ReactNode
+}
+
+const StyledPanel = ({ children }: StyledPanelProps) => (
+  <Box
+    paddingLeft='spacingM'
+    paddingRight='spacingM'
+    paddingTop='spacingXl'
+    paddingBottom='spacingL'>
+    {children}
+  </Box>
+)
+
+const VehicleTabs = ({ vehicleType }: VehicleTabsProps) => {
   return (
     <Tabs defaultTab='basic'>
       <Tabs.List>
@@ -19,23 +32,16 @@ const VehicleTabs = ({ vehicleType, selectedBasics, onBasicsChange }: VehicleTab
       </Tabs.List>
 
       <Tabs.Panel id='basic'>
-        <Box padding='spacingM'>
-          {vehicleType === 'car' && (
-            <CarTabBasics
-              selectedBasics={selectedBasics}
-              onBasicsChange={onBasicsChange || (() => {})}
-            />
-          )}
-        </Box>
+        <StyledPanel>{vehicleType === 'car' && <CarTabBasics />}</StyledPanel>
       </Tabs.Panel>
       <Tabs.Panel id='extras'>
-        <Box padding='spacingM'>Extras - {vehicleType}</Box>
+        <StyledPanel>Extras - {vehicleType}</StyledPanel>
       </Tabs.Panel>
       <Tabs.Panel id='legal'>
-        <Box padding='spacingM'>Legal - {vehicleType}</Box>
+        <StyledPanel>Legal - {vehicleType}</StyledPanel>
       </Tabs.Panel>
       <Tabs.Panel id='countries'>
-        <Box padding='spacingM'>
+        <StyledPanel>
           {vehicleType === 'boat' && (
             <>
               <Heading fontSize='fontSizeL' marginBottom='spacingM'>
@@ -48,7 +54,7 @@ const VehicleTabs = ({ vehicleType, selectedBasics, onBasicsChange }: VehicleTab
               </ul>
             </>
           )}
-        </Box>
+        </StyledPanel>
       </Tabs.Panel>
     </Tabs>
   )

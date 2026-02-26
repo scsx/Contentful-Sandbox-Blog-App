@@ -1,25 +1,29 @@
 import { Heading, FormControl, Select, Checkbox } from '@contentful/f36-components'
 import { CAR_BASICS } from '../../../utils/constants'
+import { useVehicleConfig } from '../../../hooks/useVehicleConfig'
 
-type CarTabBasicsProps = {
-  selectedBasics?: { deposit?: boolean; carAndBusTolls?: boolean; carTier?: string }
-  onBasicsChange: (basics: any) => void
-}
+const CarTabBasics = () => {
+  const { vehicleConfig, setVehicleConfig } = useVehicleConfig()
+  const selectedBasics = vehicleConfig.selectedBasics || {}
 
-const CarTabBasics = ({ selectedBasics = {}, onBasicsChange }: CarTabBasicsProps) => {
+  const handleBasicsChange = (newBasics: any) => {
+    setVehicleConfig({
+      ...vehicleConfig,
+      selectedBasics: newBasics
+    })
+  }
   return (
     <>
-      <Heading fontSize='fontSizeL' marginBottom='spacingM'>
-        Car Basics
-      </Heading>
-
       {/* Deposit */}
       <FormControl style={{ marginBottom: '16px' }}>
         <Checkbox
           id='deposit'
           name='deposit'
+          style={{ fontSize: '16px' }}
           isChecked={selectedBasics.deposit || false}
-          onChange={() => onBasicsChange({ ...selectedBasics, deposit: !selectedBasics.deposit })}>
+          onChange={() =>
+            handleBasicsChange({ ...selectedBasics, deposit: !selectedBasics.deposit })
+          }>
           {CAR_BASICS.deposit.name} - €{CAR_BASICS.deposit.price}
         </Checkbox>
       </FormControl>
@@ -29,9 +33,13 @@ const CarTabBasics = ({ selectedBasics = {}, onBasicsChange }: CarTabBasicsProps
         <Checkbox
           id='tolls'
           name='tolls'
+          style={{ fontSize: '16px' }}
           isChecked={selectedBasics.carAndBusTolls || false}
           onChange={() =>
-            onBasicsChange({ ...selectedBasics, carAndBusTolls: !selectedBasics.carAndBusTolls })
+            handleBasicsChange({
+              ...selectedBasics,
+              carAndBusTolls: !selectedBasics.carAndBusTolls
+            })
           }>
           {CAR_BASICS.tolls.name} - €{CAR_BASICS.tolls.price}
         </Checkbox>
@@ -47,7 +55,7 @@ const CarTabBasics = ({ selectedBasics = {}, onBasicsChange }: CarTabBasicsProps
 
         <Select
           value={selectedBasics.carTier || 'standard'}
-          onChange={(e) => onBasicsChange({ ...selectedBasics, carTier: e.target.value })}>
+          onChange={(e) => handleBasicsChange({ ...selectedBasics, carTier: e.target.value })}>
           {Object.entries(CAR_BASICS.tier.tiers).map(([key, tier]) => (
             <Select.Option key={key} value={key}>
               {tier.name} - €{tier.price}/day

@@ -4,21 +4,14 @@ import { useSDK } from '@contentful/react-apps-toolkit'
 import { useState, useEffect } from 'react'
 import { CarFuel } from '../components/vehicles/car/CarFuel'
 import VehicleTabs from '../components/vehicles/VehicleTabs'
-import { TVehicle } from '../types/vehicle'
+import { VehicleProvider } from '../context/VehicleContext'
+import { useVehicleConfig } from '../hooks/useVehicleConfig'
+import { usePriceCalculation } from '../hooks/usePriceCalculation'
 
-const Field = () => {
+const FieldContent = () => {
   const sdk = useSDK<FieldAppSDK>()
-
-  const [vehicleConfig] = useState<TVehicle>({
-    type: 'car',
-    carFuelType: 'petrol',
-    carBatteryType: null,
-    selectedBasics: {},
-    selectedExtras: {},
-    costPerDay: 0,
-    costFixed: 0,
-    costOfDeposit: 0
-  })
+  const { vehicleConfig } = useVehicleConfig()
+  usePriceCalculation() // Calcula preços automaticamente
 
   const [vehicleType, setVehicleType] = useState('car')
   const [fuelType, setFuelType] = useState('petrol')
@@ -63,28 +56,30 @@ const Field = () => {
           <VehicleTabs vehicleType={vehicleType as 'car' | 'boat' | 'bus'} />
         </Box>
         <Box>
-          <Heading fontSize='fontSizeL' marginBottom='none'>
-            Daily price
-          </Heading>
+          <Heading fontSize='fontSizeL'>Daily price</Heading>
           <Heading fontSize='fontSize3Xl' fontColor='green500'>
-            55€
+            {vehicleConfig.costPerDay}€
           </Heading>
-          <Heading fontSize='fontSizeL' marginBottom='none'>
-            Fixed price
-          </Heading>
+          <Heading fontSize='fontSizeL'>Fixed price</Heading>
           <Heading fontSize='fontSize3Xl' fontColor='green500'>
-            0€
+            {vehicleConfig.costFixed}€
           </Heading>
-          <Heading fontSize='fontSizeL' marginBottom='none'>
-            Deposit
-          </Heading>
+          <Heading fontSize='fontSizeL'>Deposit</Heading>
           <Heading fontSize='fontSize3Xl' fontColor='green500'>
-            150€
+            {vehicleConfig.costOfDeposit}€
           </Heading>
         </Box>
       </Flex>
       <Paragraph marginTop='spacingXl'>This is Field Component (AppId: {sdk.ids.app})</Paragraph>
     </>
+  )
+}
+
+const Field = () => {
+  return (
+    <VehicleProvider>
+      <FieldContent />
+    </VehicleProvider>
   )
 }
 
