@@ -1,39 +1,48 @@
-import {
-  Flex,
-  Box,
-  Paragraph,
-  Heading,
-  Tabs,
-  Select,
-  FormControl
-} from '@contentful/f36-components'
+import { Flex, Box, Paragraph, Heading, Select, FormControl } from '@contentful/f36-components'
 import { FieldAppSDK } from '@contentful/app-sdk'
 import { useSDK } from '@contentful/react-apps-toolkit'
 import { useState, useEffect } from 'react'
+import { CarFuel } from '../components/vehicles/car/CarFuel'
+import VehicleTabs from '../components/vehicles/VehicleTabs'
+import { TVehicle } from '../types/vehicle'
 
 const Field = () => {
   const sdk = useSDK<FieldAppSDK>()
+
+  const [vehicleConfig] = useState<TVehicle>({
+    type: 'car',
+    carFuelType: 'petrol',
+    carBatteryType: null,
+    selectedBasics: {},
+    selectedExtras: {},
+    costPerDay: 0,
+    costFixed: 0,
+    costOfDeposit: 0
+  })
+
   const [vehicleType, setVehicleType] = useState('car')
   const [fuelType, setFuelType] = useState('petrol')
+  const [batteryType, setBatteryType] = useState('Lithium-NMC')
 
   useEffect(() => {
     sdk.window.startAutoResizer()
   }, [sdk.window])
 
-  /*
-     To use the cma, access it as follows.
-     If it is not needed, you can remove the next line.
-  */
-  // const cma = sdk.cma;
-  // If you only want to extend Contentful's default editing experience
-  // reuse Contentful's editor components
-  // -> https://www.contentful.com/developers/docs/extensibility/field-editors/
+  // Guardar no Contentful
+  useEffect(() => {
+    sdk.field.setValue(vehicleConfig)
+  }, [vehicleConfig, sdk])
+
   return (
     <>
       <Flex justifyContent='space-between' alignItems='start'>
         <Box flexGrow={1}>
           <FormControl>
-            <FormControl.Label>Vehicle Type</FormControl.Label>
+            <FormControl.Label>
+              <Heading fontSize='fontSizeL' marginBottom='none'>
+                Vehicle Type
+              </Heading>
+            </FormControl.Label>
 
             <Select value={vehicleType} onChange={(e) => setVehicleType(e.target.value)}>
               <Select.Option value='car'>Car</Select.Option>
@@ -43,39 +52,38 @@ const Field = () => {
           </FormControl>
 
           {vehicleType === 'car' && (
-            <FormControl style={{ marginTop: '16px' }}>
-              <FormControl.Label>Fuel Type</FormControl.Label>
-
-              <Select value={fuelType} onChange={(e) => setFuelType(e.target.value)}>
-                <Select.Option value='petrol'>Petrol</Select.Option>
-                <Select.Option value='diesel'>Diesel</Select.Option>
-                <Select.Option value='electric'>Electric</Select.Option>
-              </Select>
-            </FormControl>
+            <CarFuel
+              fuelType={fuelType}
+              batteryType={batteryType}
+              onFuelTypeChange={setFuelType}
+              onBatteryTypeChange={setBatteryType}
+            />
           )}
 
-          <Tabs>
-            <Tabs.List>
-              <Tabs.Tab panelId='basic'>Basic</Tabs.Tab>
-              <Tabs.Tab panelId='engine'>Extras</Tabs.Tab>
-              <Tabs.Tab panelId='legal'>Legal</Tabs.Tab>
-            </Tabs.List>
-
-            <Tabs.Panel id='basic'>Basic</Tabs.Panel>
-
-            <Tabs.Panel id='engine'>Extras</Tabs.Panel>
-
-            <Tabs.Panel id='legal'>Legal</Tabs.Panel>
-          </Tabs>
+          <VehicleTabs vehicleType={vehicleType as 'car' | 'boat' | 'bus'} />
         </Box>
         <Box>
-          <Heading fontSize='fontSizeXl'>Final price</Heading>
+          <Heading fontSize='fontSizeL' marginBottom='none'>
+            Daily price
+          </Heading>
           <Heading fontSize='fontSize3Xl' fontColor='green500'>
-            55€/day
+            55€
+          </Heading>
+          <Heading fontSize='fontSizeL' marginBottom='none'>
+            Fixed price
+          </Heading>
+          <Heading fontSize='fontSize3Xl' fontColor='green500'>
+            0€
+          </Heading>
+          <Heading fontSize='fontSizeL' marginBottom='none'>
+            Deposit
+          </Heading>
+          <Heading fontSize='fontSize3Xl' fontColor='green500'>
+            150€
           </Heading>
         </Box>
       </Flex>
-      <Paragraph>Hello Entry Field Component (from field) (AppId: {sdk.ids.app})</Paragraph>
+      <Paragraph marginTop='spacingXl'>This is Field Component (AppId: {sdk.ids.app})</Paragraph>
     </>
   )
 }

@@ -23,6 +23,42 @@ export const CAR_BASICS = {
     price: 80,
     description: 'One-time toll charges for highways and bridges',
     isFixedFee: true
+  },
+  tier: {
+    name: 'Tier',
+    tiers: {
+      economy: {
+        name: 'Economy (2pax)',
+        price: 40
+      },
+      standard: {
+        name: 'Standard (4pax)',
+        price: 55
+      },
+      family: {
+        name: 'Family (5pax + bags)',
+        price: 70
+      },
+      luxury: {
+        name: 'Luxury (2pax + bags)',
+        price: 125
+      }
+    }
+  }
+}
+
+export const ELECTRIC_CAR_BATTERY = {
+  'Lithium-NMC': {
+    name: 'Lithium-NMC',
+    price: 5
+  },
+  'Sodium-ion': {
+    name: 'Sodium-ion',
+    price: 7
+  },
+  NiMH: {
+    name: 'NiMH',
+    price: 3
   }
 }
 
