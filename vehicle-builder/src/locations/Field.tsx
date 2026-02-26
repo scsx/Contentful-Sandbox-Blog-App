@@ -57,15 +57,15 @@ const Field = () => {
           <Tabs>
             <Tabs.List>
               <Tabs.Tab panelId='basic'>Basic</Tabs.Tab>
-              <Tabs.Tab panelId='engine'>Engine</Tabs.Tab>
+              <Tabs.Tab panelId='engine'>Extras</Tabs.Tab>
               <Tabs.Tab panelId='legal'>Legal</Tabs.Tab>
             </Tabs.List>
 
-            <Tabs.Panel id='basic'>Basic info content</Tabs.Panel>
+            <Tabs.Panel id='basic'>Basic</Tabs.Panel>
 
-            <Tabs.Panel id='engine'>Engine content</Tabs.Panel>
+            <Tabs.Panel id='engine'>Extras</Tabs.Panel>
 
-            <Tabs.Panel id='legal'>Legal content</Tabs.Panel>
+            <Tabs.Panel id='legal'>Legal</Tabs.Panel>
           </Tabs>
         </Box>
         <Box>
