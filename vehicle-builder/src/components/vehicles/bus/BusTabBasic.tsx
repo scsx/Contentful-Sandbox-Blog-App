@@ -1,6 +1,7 @@
 import { Heading, FormControl, Checkbox } from '@contentful/f36-components'
 import { BUS_BASICS } from '../../../utils/constants'
 import { useVehicleConfig } from '../../../hooks/useVehicleConfig'
+import { Caption } from '@contentful/f36-components'
 
 const BusTabBasic = () => {
   const { vehicleConfig, setVehicleConfig } = useVehicleConfig()
@@ -15,10 +16,6 @@ const BusTabBasic = () => {
 
   return (
     <>
-      <Heading fontSize='fontSizeL' marginBottom='spacingM'>
-        Bus Basics
-      </Heading>
-
       {/* Deposit */}
       <FormControl style={{ marginBottom: '16px' }}>
         <Checkbox
@@ -68,10 +65,10 @@ const BusTabBasic = () => {
       </FormControl>
 
       {/* Passengers */}
+      <Heading fontSize='fontSizeL' marginTop='spacingXl'>
+        {BUS_BASICS.passengers.name}
+      </Heading>
       <FormControl style={{ marginTop: '16px' }}>
-        <label htmlFor='passengers' style={{ fontSize: '16px' }}>
-          {BUS_BASICS.passengers.name} - €{BUS_BASICS.passengers.price} per passenger
-        </label>
         <input
           type='range'
           id='passengers'
@@ -85,8 +82,11 @@ const BusTabBasic = () => {
               busPassengers: Number(e.target.value)
             })
           }
+          style={{ width: '100%', cursor: 'pointer' }}
         />
+        <Caption fontWeight='fontWeightMedium'>{selectedBasics.busPassengers || 1}</Caption>
       </FormControl>
+      <Caption> €{BUS_BASICS.passengers.price} per passenger</Caption>
     </>
   )
 }

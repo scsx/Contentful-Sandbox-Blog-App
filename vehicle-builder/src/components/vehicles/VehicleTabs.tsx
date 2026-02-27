@@ -31,7 +31,7 @@ const StyledPanel = ({ children }: StyledPanelProps) => (
 
 const VehicleTabs = ({ vehicleType }: VehicleTabsProps) => {
   return (
-    <Tabs defaultTab='basic'>
+    <Tabs key={vehicleType} defaultTab='basic'>
       <Tabs.List>
         <Tabs.Tab panelId='basic'>Basic</Tabs.Tab>
         <Tabs.Tab panelId='extras'>Extras</Tabs.Tab>

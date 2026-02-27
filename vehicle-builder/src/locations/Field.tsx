@@ -23,11 +23,17 @@ const FieldContent = () => {
   useEffect(() => {
     if (vehicleType !== vehicleConfig.type) {
       setVehicleConfig({
-        ...vehicleConfig,
-        type: vehicleType as 'car' | 'boat' | 'bus'
+        type: vehicleType as 'car' | 'boat' | 'bus',
+        carFuelType: vehicleType === 'car' ? 'petrol' : undefined,
+        carBatteryType: vehicleType === 'car' ? null : undefined,
+        selectedBasics: {},
+        selectedExtras: {},
+        costPerDay: 0,
+        costFixed: 0,
+        costOfDeposit: 0
       })
     }
-  }, [vehicleType, vehicleConfig, setVehicleConfig])
+  }, [vehicleType, setVehicleConfig])
 
   // Guardar no Contentful
   useEffect(() => {

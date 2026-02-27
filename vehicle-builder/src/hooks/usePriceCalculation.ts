@@ -79,6 +79,9 @@ export const usePriceCalculation = () => {
       if (selectedBasics.busDriverClearance) {
         costFixed += BUS_BASICS.driverClearance.price
       }
+      if (selectedBasics.busPassengers) {
+        costFixed += selectedBasics.busPassengers * BUS_BASICS.passengers.price
+      }
 
       // Deposit
       if (selectedBasics.deposit) {
