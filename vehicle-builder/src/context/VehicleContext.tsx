@@ -1,4 +1,4 @@
-import { createContext, useState, ReactNode } from 'react'
+import { createContext, useState, ReactNode, useMemo } from 'react'
 import { TVehicle } from '../types/vehicle'
 
 type VehicleContextType = {
@@ -24,9 +24,7 @@ export const VehicleProvider = ({ children }: VehicleProviderProps) => {
     costOfDeposit: 0
   })
 
-  return (
-    <VehicleContext.Provider value={{ vehicleConfig, setVehicleConfig }}>
-      {children}
-    </VehicleContext.Provider>
-  )
+  const value = useMemo(() => ({ vehicleConfig, setVehicleConfig }), [vehicleConfig])
+
+  return <VehicleContext.Provider value={value}>{children}</VehicleContext.Provider>
 }

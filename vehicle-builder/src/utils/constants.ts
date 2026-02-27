@@ -9,6 +9,18 @@ export const BOAT_BASICS = {
     price: 300,
     description: 'One-time fee for marina berth and facilities',
     isFixedFee: true
+  },
+  harborPermit: {
+    name: 'Harbor & Berthing Permit',
+    price: 150,
+    description: 'Administrative fee for harbor access and mooring rights',
+    isFixedFee: true
+  },
+  cleaningFee: {
+    name: 'End-of-Rental Cleaning',
+    price: 200,
+    description: 'Professional boat cleaning and inspection',
+    isFixedFee: true
   }
 }
 

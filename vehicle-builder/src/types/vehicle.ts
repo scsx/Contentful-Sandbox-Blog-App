@@ -7,6 +7,8 @@ export type TVehicle = {
   selectedBasics?: {
     deposit?: boolean
     boatMarinaFee?: boolean // boat only
+    boatHarborPermit?: boolean // boat only
+    boatCleaningFee?: boolean // boat only
     carAndBusTolls?: boolean // car, bus
     carTier?: 'economy' | 'standard' | 'family' | 'luxury' // car only
     busDriverClearance?: boolean // bus only

@@ -1,5 +1,13 @@
 import { Tabs, Box, Heading } from '@contentful/f36-components'
 import CarTabBasics from './car/CarTabBasics'
+import CarTabExtras from './car/CarTabExtras'
+import CarTabLegal from './car/CarTabLegal'
+import BoatTabBasic from './boat/BoatTabBasic'
+import BoatTabExtras from './boat/BoatTabExtras'
+import BoatTabLegal from './boat/BoatTabLegal'
+import BusTabBasic from './bus/BusTabBasic'
+import BusTabExtras from './bus/BusTabExtras'
+import BusTabLegal from './bus/BusTabLegal'
 import { BOAT_COUNTRIES } from '../../utils/constants'
 import { ReactNode } from 'react'
 
@@ -32,13 +40,25 @@ const VehicleTabs = ({ vehicleType }: VehicleTabsProps) => {
       </Tabs.List>
 
       <Tabs.Panel id='basic'>
-        <StyledPanel>{vehicleType === 'car' && <CarTabBasics />}</StyledPanel>
+        <StyledPanel>
+          {vehicleType === 'car' && <CarTabBasics />}
+          {vehicleType === 'boat' && <BoatTabBasic />}
+          {vehicleType === 'bus' && <BusTabBasic />}
+        </StyledPanel>
       </Tabs.Panel>
       <Tabs.Panel id='extras'>
-        <StyledPanel>Extras - {vehicleType}</StyledPanel>
+        <StyledPanel>
+          {vehicleType === 'car' && <CarTabExtras />}
+          {vehicleType === 'boat' && <BoatTabExtras />}
+          {vehicleType === 'bus' && <BusTabExtras />}
+        </StyledPanel>
       </Tabs.Panel>
       <Tabs.Panel id='legal'>
-        <StyledPanel>Legal - {vehicleType}</StyledPanel>
+        <StyledPanel>
+          {vehicleType === 'car' && <CarTabLegal />}
+          {vehicleType === 'boat' && <BoatTabLegal />}
+          {vehicleType === 'bus' && <BusTabLegal />}
+        </StyledPanel>
       </Tabs.Panel>
       <Tabs.Panel id='countries'>
         <StyledPanel>

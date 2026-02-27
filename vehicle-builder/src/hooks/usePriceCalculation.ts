@@ -50,6 +50,12 @@ export const usePriceCalculation = () => {
       if (selectedBasics.boatMarinaFee) {
         costFixed += BOAT_BASICS.marinaFee.price
       }
+      if (selectedBasics.boatHarborPermit) {
+        costFixed += BOAT_BASICS.harborPermit.price
+      }
+      if (selectedBasics.boatCleaningFee) {
+        costFixed += BOAT_BASICS.cleaningFee.price
+      }
 
       // Deposit
       if (selectedBasics.deposit) {

@@ -10,16 +10,24 @@ import { usePriceCalculation } from '../hooks/usePriceCalculation'
 
 const FieldContent = () => {
   const sdk = useSDK<FieldAppSDK>()
-  const { vehicleConfig } = useVehicleConfig()
+  const { vehicleConfig, setVehicleConfig } = useVehicleConfig()
   usePriceCalculation() // Calcula preços automaticamente
 
   const [vehicleType, setVehicleType] = useState('car')
-  const [fuelType, setFuelType] = useState('petrol')
-  const [batteryType, setBatteryType] = useState('Lithium-NMC')
 
   useEffect(() => {
     sdk.window.startAutoResizer()
   }, [sdk.window])
+
+  // Atualizar tipo de veículo no contexto
+  useEffect(() => {
+    if (vehicleType !== vehicleConfig.type) {
+      setVehicleConfig({
+        ...vehicleConfig,
+        type: vehicleType as 'car' | 'boat' | 'bus'
+      })
+    }
+  }, [vehicleType, vehicleConfig, setVehicleConfig])
 
   // Guardar no Contentful
   useEffect(() => {
@@ -44,14 +52,7 @@ const FieldContent = () => {
             </Select>
           </FormControl>
 
-          {vehicleType === 'car' && (
-            <CarFuel
-              fuelType={fuelType}
-              batteryType={batteryType}
-              onFuelTypeChange={setFuelType}
-              onBatteryTypeChange={setBatteryType}
-            />
-          )}
+          {vehicleType === 'car' && <CarFuel />}
 
           <VehicleTabs vehicleType={vehicleType as 'car' | 'boat' | 'bus'} />
         </Box>
