@@ -91,6 +91,12 @@ export const BUS_BASICS = {
     price: 160,
     description: 'One-time toll charges for highways and bridges',
     isFixedFee: true
+  },
+  passengers: {
+    name: 'Passenger Fee',
+    price: 15,
+    description: 'One-time fee per passenger',
+    isFixedFee: true
   }
 }
 

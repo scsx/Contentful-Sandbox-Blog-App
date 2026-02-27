@@ -12,6 +12,7 @@ export type TVehicle = {
     carAndBusTolls?: boolean // car, bus
     carTier?: 'economy' | 'standard' | 'family' | 'luxury' // car only
     busDriverClearance?: boolean // bus only
+    busPassengers?: number // bus only
   }
 
   // Extras (daily add-ons)

@@ -66,6 +66,27 @@ const BusTabBasic = () => {
           {BUS_BASICS.tolls.name} - €{BUS_BASICS.tolls.price}
         </Checkbox>
       </FormControl>
+
+      {/* Passengers */}
+      <FormControl style={{ marginTop: '16px' }}>
+        <label htmlFor='passengers' style={{ fontSize: '16px' }}>
+          {BUS_BASICS.passengers.name} - €{BUS_BASICS.passengers.price} per passenger
+        </label>
+        <input
+          type='range'
+          id='passengers'
+          name='passengers'
+          min='1'
+          max='50'
+          value={selectedBasics.busPassengers || 1}
+          onChange={(e) =>
+            handleBasicsChange({
+              ...selectedBasics,
+              busPassengers: Number(e.target.value)
+            })
+          }
+        />
+      </FormControl>
     </>
   )
 }
