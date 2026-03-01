@@ -1,14 +1,14 @@
-import { Tabs, Box, Heading } from '@contentful/f36-components'
+import { Tabs, Box } from '@contentful/f36-components'
 import CarTabBasics from './car/CarTabBasics'
 import CarTabExtras from './car/CarTabExtras'
 import CarTabLegal from './car/CarTabLegal'
 import BoatTabBasic from './boat/BoatTabBasic'
 import BoatTabExtras from './boat/BoatTabExtras'
 import BoatTabLegal from './boat/BoatTabLegal'
+import BoatTabCountries from './boat/BoatTabCountries'
 import BusTabBasic from './bus/BusTabBasic'
 import BusTabExtras from './bus/BusTabExtras'
 import BusTabLegal from './bus/BusTabLegal'
-import { BOAT_COUNTRIES } from '../../utils/constants'
 import { ReactNode } from 'react'
 
 type VehicleTabsProps = {
@@ -61,20 +61,7 @@ const VehicleTabs = ({ vehicleType }: VehicleTabsProps) => {
         </StyledPanel>
       </Tabs.Panel>
       <Tabs.Panel id='countries'>
-        <StyledPanel>
-          {vehicleType === 'boat' && (
-            <>
-              <Heading fontSize='fontSizeL' marginBottom='spacingM'>
-                Allowed Countries to sail to
-              </Heading>
-              <ul>
-                {BOAT_COUNTRIES.map((country) => (
-                  <li key={country}>{country}</li>
-                ))}
-              </ul>
-            </>
-          )}
-        </StyledPanel>
+        <StyledPanel>{vehicleType === 'boat' && <BoatTabCountries />}</StyledPanel>
       </Tabs.Panel>
     </Tabs>
   )

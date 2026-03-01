@@ -43,7 +43,7 @@ const FieldContent = () => {
   return (
     <>
       <Flex justifyContent='space-between' alignItems='start'>
-        <Box flexGrow={1}>
+        <Box style={{ flex: '1 1 auto' }} paddingRight='spacingXl'>
           <FormControl>
             <FormControl.Label>
               <Heading fontSize='fontSizeL' marginBottom='none'>
