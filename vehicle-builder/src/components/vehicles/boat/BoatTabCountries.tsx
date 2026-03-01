@@ -1,4 +1,4 @@
-import { Heading, List, Spinner } from '@contentful/f36-components'
+import { Heading, List, Spinner, Caption, Box } from '@contentful/f36-components'
 import { useContentfulCountries } from '../../../hooks/useContentfulCountries'
 
 const BoatTabCountries = () => {
@@ -14,11 +14,14 @@ const BoatTabCountries = () => {
 
   return (
     <>
-      <Heading fontSize='fontSizeL' marginBottom='spacingM'>
+      <Heading fontSize='fontSizeL' marginBottom='none'>
         Allowed Countries to sail to
       </Heading>
+      <Box marginBottom='spacingXl'>
+        <Caption>This list comes from Contentful, it's of type Countries</Caption>
+      </Box>
       {countries.length === 0 ? (
-        <div>No countries available</div>
+        <Caption>No countries available</Caption>
       ) : (
         <List>
           {countries.map((country) => (
